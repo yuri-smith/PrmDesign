@@ -1,0 +1,30 @@
+    <p-toolbar>
+        <div class="ui-toolbar">
+            {{title}}
+        </div>
+
+        <div class="ui-toolbar-group-left">
+            <!-- <p-splitButton label="Справочники" icon="fa-check" (onClick)="change-dict()" [model]="items"></p-splitButton> -->
+            <p-splitButton label="Справочники" icon="fa-check" [model]="items"></p-splitButton>
+            <i class="fa fa-bars"></i>
+            <button pButton type="button" label="New" icon="fa-plus"></button>
+            <button pButton type="button" label="Open" icon="fa-folder-open"></button>
+        </div>
+        
+        <div class="ui-toolbar-group-right">
+            <label>{{user}}</label>
+            <button pButton type="button" label="Вход" [disabled]=!isLogIn (click)="login($event)" icon="fa-sign-in"></button>
+            <button pButton type="button" label="Выход" [disabled]=!isLogOut (click)="logout($event)" icon="fa-sign-out"></button>
+           
+<!--             <button pButton type="button" icon="fa-search"></button>
+            <i class="fa fa-bars"></i>
+            <button pButton type="button" icon="fa-refresh"></button>
+            <button pButton type="button" icon="fa-trash"></button>
+ -->        
+        </div>
+    </p-toolbar>
+    
+
+<!-- <app-dims></app-dims> -->
+<router-outlet></router-outlet>
+

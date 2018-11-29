@@ -1,0 +1,76 @@
+<p-dataTable [value]="companies" selectionMode="single" [(selection)]="company" 
+(onRowSelect)="onRowSelect()" [paginator]="true" rows="10" [pageLinks]="3" 
+[rowsPerPageOptions]="[10,20,30]" [responsive]="true" [loading]="isLoading">
+    <p-header>Компании</p-header>
+    <p-column field="id" header="Id" [sortable]="true"></p-column>
+    <p-column field="name" header="Имя" [sortable]="true"></p-column>
+    <p-column field="inn" header="ИНН" [sortable]="false"></p-column>
+    <p-column field="descr" header="Комментарий" [sortable]="false"></p-column>
+    <ng-template pTemplate="paginatorLeft">
+        <button type="button" pButton icon="fa-plus" style="float:left" (click)="showDialogToAdd()" label="Новая строка"></button>
+    </ng-template>
+</p-dataTable>
+<p *ngIf="cloneCompany">
+    <p-dialog header={{headerDialod}} [(visible)]="displayDialog" 
+    [responsive]="true" showEffect="fade" [modal]="true">
+<!--         <br>
+        <span class="ui-float-label">
+            <input id="float-input" type="text" size="36" pInputText [(ngModel)]="companyProfile.companyId"> 
+            <label for="float-input">CompanyId</label>
+        </span><br>
+ -->
+        <br>
+        <span class="ui-float-label">
+            <input id="float-input" type="text" size="36" pInputText [(ngModel)]="cloneCompany.name"> 
+            <label for="float-input">Имя</label>
+        </span><br>
+        <span class="ui-float-label">
+            <input id="float-input" type="text" size="36" pInputText [(ngModel)]="cloneCompany.inn"> 
+            <label for="float-input">ИНН</label>
+            <!-- <p-message severity="error" text="Field is required"></p-message>             -->
+        </span><br>
+<!--         <span class="ui-float-label">
+            <p-autoComplete [(ngModel)]="country" inputId="float-input" [suggestions]="countries" 
+                (completeMethod)="getCountries()" field="name" [size]="30"
+                [dropdown]="true" [minLength]="1" dropdownMode="current" readonly="true">
+            </p-autoComplete>
+            <label for="float-input">Страна</label>
+        </span><br>
+ -->         
+        <span class="ui-float-label">
+            <textarea id="float-input" [rows]="5" [cols]="34" 
+                pInputTextarea [(ngModel)]="cloneCompany.descr" 
+                autoResize="autoResize"></textarea>
+            <label for="float-input">Комментарий</label>
+        </span><br>
+    
+        <p-footer>
+            <div class="ui-dialog-buttonpane ui-helper-clearfix">
+                <button type="button" pButton icon="fa-close" (click)="delete()" label="Удалить"></button>
+                <button type="button" pButton icon="fa-check" (click)="save()" label="Сохранить"></button>
+                <button type="button" pButton icon="fa-close" (click)="profileShow()" label="Профиль"></button>
+            </div>
+        </p-footer>
+
+    </p-dialog>
+</p>
+<p *ngIf="cloneProfile">
+    <p-dialog header="Профиль компании" [(visible)]="displayProfile" 
+    [responsive]="true" showEffect="fade" [modal]="true">
+    <br>
+    <!-- <p *ngIf=profile.legaladdress> -->
+        <span class="ui-float-label">
+            <input id="float-input" type="text" size="36" pInputText [(ngModel)]="cloneProfile.legalAddress.city.name"> 
+            <label for="float-input">Город</label>
+        </span>
+    <!-- </p> -->
+    <br>
+    <!-- <p-growl [(value)]="msgs"></p-growl> -->
+    <p-footer>
+            <div class="ui-dialog-buttonpane ui-helper-clearfix">
+                    <!-- <button type="button" pButton icon="fa-close" (click)="closeProfil()" label="Cancel"></button> -->
+                    <button type="button" pButton icon="fa-check" (click)="saveProfil()" label="Сохранить"></button>
+            </div>
+        </p-footer>
+    </p-dialog>
+</p>

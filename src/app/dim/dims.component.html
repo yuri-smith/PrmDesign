@@ -1,0 +1,29 @@
+<p-dataTable [value]="dims" selectionMode="single" [(selection)]="selectedDim" 
+    (onRowSelect)="onRowSelect($event)" [paginator]="true" rows="10" [pageLinks]="3" 
+    [rowsPerPageOptions]="[10,20,30]" [responsive]="true" [loading]="loading">
+  <p-header>Единицы измерения</p-header>
+  <p-column field="id" header="Id" [sortable]="true"></p-column>
+  <p-column field="name" header="Имя" [sortable]="true"></p-column>
+  <!-- <p-column field="descr" header="Комментарий" [sortable]="false"></p-column> -->
+    <ng-template pTemplate="paginatorLeft">
+        <button type="button" pButton icon="fa-plus" style="float:left" (click)="showDialogToAdd()" label="Новая строка"></button>
+    </ng-template>
+</p-dataTable>
+<p-dialog header={{headerDialod}} [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true">
+  <div class="ui-grid ui-grid-responsive ui-fluid" *ngIf="dim">
+      <div class="ui-grid-row">
+          <div class="ui-grid-col-4"><label for="name">Имя</label></div>
+          <div class="ui-grid-col-8"><input pInputText id="name" [(ngModel)]="dim.name" /></div>
+      </div>
+      <!-- <div class="ui-grid-row">
+          <div class="ui-grid-col-4"><label for="descr">Примечание</label></div>
+          <div class="ui-grid-col-8"><input pInputText id="descr" [(ngModel)]="dim.descr" /></div>
+      </div> -->
+  </div>
+  <p-footer>
+      <div class="ui-dialog-buttonpane ui-helper-clearfix">
+          <button type="button" pButton icon="fa-close" (click)="delete()" label="Удалить"></button>
+          <button type="button" pButton icon="fa-check" (click)="save()" label="Сохранить"></button>
+      </div>
+  </p-footer>
+</p-dialog>
